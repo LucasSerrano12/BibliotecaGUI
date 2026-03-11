@@ -1,0 +1,95 @@
+//---------------------------------------------------------------------------
+
+#ifndef Unit3H
+#define Unit3H
+//---------------------------------------------------------------------------
+#include <System.Classes.hpp>
+#include <Vcl.Controls.hpp>
+#include <Vcl.StdCtrls.hpp>
+#include <Vcl.Forms.hpp>
+#include <Vcl.ComCtrls.hpp>
+#include <Vcl.Grids.hpp>
+#include <Vcl.ExtCtrls.hpp>
+//---------------------------------------------------------------------------
+class TForm3 : public TForm
+{
+__published:	// IDE-managed Components
+	TPageControl *PageControl1;
+	TTabSheet *TabSheet1;
+	TTabSheet *TabSheet2;
+	TTabSheet *TabSheet3;
+	TTabSheet *TabSheet4;
+	TTabSheet *TabSheet5;
+	TStringGrid *PlanillaMostrarLibros;
+	TButton *Button1;
+	TLabel *Label1;
+	TButton *Button2;
+	TEdit *Casillaid;
+	TLabel *Label2;
+	TLabel *Label3;
+	TLabel *Label4;
+	TLabel *Label5;
+	TLabel *Label6;
+	TLabel *Label7;
+	TLabel *Label8;
+	TLabel *Label9;
+	TEdit *Casillanombre;
+	TEdit *Casillaarea;
+	TEdit *Casillasubarea;
+	TEdit *Casillaautores;
+	TEdit *Casillaeditorial;
+	TEdit *Casillaanopublicacion;
+	TEdit *Casillaestado;
+	TEdit *Casillacantdisponible;
+	TLabel *Label10;
+	TButton *BotonBuscarLibro;
+	TLabel *Label11;
+	TButton *BotonEliminarLibro;
+	TEdit *CasillaTextoIDLibro;
+	TStringGrid *PlanillaBuscarLibros;
+	TEdit *CasillaBuscarLibro;
+	TPanel *Panel1;
+	TPanel *Panel2;
+	TPanel *Panel3;
+	TLabel *Label12;
+	TLabel *Label13;
+	TEdit *CasillaIdBuscarLibroModificar;
+	TEdit *CasillaIdModificarLibro;
+	TStringGrid *PlanillaBuscarLibrosModificar;
+	TButton *Button3;
+	TButton *Button4;
+	TLabel *Label14;
+	TLabel *Label15;
+	TLabel *Label16;
+	TLabel *Label17;
+	TLabel *Label18;
+	TLabel *Label19;
+	TLabel *Label20;
+	TLabel *Label21;
+	TEdit *CasillaNombreModificarLibro;
+	TEdit *CasillaAreaModificarLibro;
+	TEdit *CasillaSubAreaModificarLibro;
+	TEdit *Edit6;
+	TEdit *CasillaAutoresModificarLibro;
+	TEdit *Edit8;
+	TEdit *CasillaEditorialModificarLibro;
+	TEdit *CasillaAnoPublicacionModificarLibro;
+	TStringGrid *StringGrid2;
+	void __fastcall Button1Click(TObject *Sender);
+	void __fastcall Button2Click(TObject *Sender);
+	void __fastcall BotonEliminarLibroClick(TObject *Sender);
+	void __fastcall BotonBuscarLibroClick(TObject *Sender);
+	void __fastcall Button3Click(TObject *Sender);
+	void __fastcall PlanillaBuscarLibrosModificarClick(TObject *Sender);
+	void __fastcall Button4Click(TObject *Sender);
+private:	// User declarations
+public:
+void __fastcall MostrarLibros();
+  Socios listaSocios;
+  Libros listaLibros;
+	__fastcall TForm3(TComponent* Owner);
+};
+//---------------------------------------------------------------------------
+extern PACKAGE TForm3 *Form3;
+//---------------------------------------------------------------------------
+#endif

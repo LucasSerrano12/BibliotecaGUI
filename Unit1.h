@@ -1,0 +1,68 @@
+//---------------------------------------------------------------------------
+
+#ifndef Unit1H
+#define Unit1H
+//---------------------------------------------------------------------------
+#include <System.Classes.hpp>
+#include <Vcl.Controls.hpp>
+#include <Vcl.StdCtrls.hpp>
+#include <Vcl.Forms.hpp>
+#include "socios.h"
+#include "libros.h"
+#include <Vcl.ExtCtrls.hpp>
+#include <Vcl.WinXPickers.hpp>
+#include <IdBaseComponent.hpp>
+#include <IdComponent.hpp>
+#include <IdDayTime.hpp>
+#include <IdTCPClient.hpp>
+#include <IdTCPConnection.hpp>
+#include <Vcl.ComCtrls.hpp>
+#include <Vcl.Menus.hpp>
+#include <Vcl.Buttons.hpp>
+#include <Vcl.Imaging.pngimage.hpp>
+#include <Vcl.Imaging.jpeg.hpp>
+
+
+//---------------------------------------------------------------------------
+class TForm1 : public TForm
+{
+__published:	// IDE-managed Components
+	TPanel *TituloMenuPrincipal;
+	TPanel *PanelInferior;
+	TPopupMenu *PopupOpciones;
+	TMenuItem *itmAdministrarLibros;
+	TMenuItem *itmAdministrarSocios;
+	TMenuItem *itmAdministrarPrestamos;
+	TLabel *Texto_SociosReg;
+	TLabel *Texto_CantLibros;
+	TLabel *Texto_PrestRealiz;
+	TSpeedButton *btnOpciones;
+	TSpeedButton *BtnAyuda;
+	TSpeedButton *BtnSalir;
+	TTimer *TimerHora;
+	TLabel *lblFecha;
+	TLabel *lblHora;
+	TImage *Image2;
+	TImage *Image3;
+	void __fastcall itmAdministrarLibrosClick(TObject *Sender);
+	void __fastcall btnOpcionesClick(TObject *Sender);
+	void __fastcall BtnSalirClick(TObject *Sender);
+	void __fastcall TimerHoraTimer(TObject *Sender);
+	void __fastcall itmAdministrarSociosClick(TObject *Sender);
+	void __fastcall itmAdministrarPrestamosClick(TObject *Sender);
+	void __fastcall BtnAyudaClick(TObject *Sender);
+
+
+
+
+private:	// User declarations
+public:		// User declarations
+	Socios listaSocios;
+	Libros listaLibros;
+	__fastcall TForm1(TComponent* Owner);
+
+};
+//---------------------------------------------------------------------------
+extern PACKAGE TForm1 *Form1;
+//---------------------------------------------------------------------------
+#endif

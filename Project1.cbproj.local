@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2025/05/23 13:52:31.000.769,=C:\Users\Manur\OneDrive\Documentos\Embarcadero\Studio\Projects\Project1PCH1.h</Transaction>
+    <Transaction>2025/05/23 13:52:32.000.123,=C:\Users\Manur\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.cpp</Transaction>
+    <Transaction>2025/05/23 13:54:42.000.641,C:\Users\Manur\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.h=C:\Users\Manur\OneDrive\Escritorio\Proyecto cC++\Unit1.h</Transaction>
+    <Transaction>2025/05/23 13:54:42.000.661,C:\Users\Manur\OneDrive\Documentos\Embarcadero\Studio\Projects\Project1.cbproj=C:\Users\Manur\OneDrive\Escritorio\Proyecto cC++\Project1.cbproj</Transaction>
+    <Transaction>2025/05/23 13:54:42.000.641,C:\Users\Manur\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\Manur\OneDrive\Escritorio\Proyecto cC++\Unit1.dfm</Transaction>
+    <Transaction>2025/05/23 13:54:42.000.611,C:\Users\Manur\OneDrive\Documentos\Embarcadero\Studio\Projects\Project1PCH1.h=C:\Users\Manur\OneDrive\Escritorio\Proyecto cC++\Project1PCH1.h</Transaction>
+    <Transaction>2025/05/23 13:54:42.000.641,C:\Users\Manur\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.cpp=C:\Users\Manur\OneDrive\Escritorio\Proyecto cC++\Unit1.cpp</Transaction>
+    <Transaction>2025/05/23 14:00:08.000.302,=C:\Users\Manur\OneDrive\Escritorio\Proyecto cC++\socios.cpp</Transaction>
+    <Transaction>2025/05/23 14:00:27.000.200,=C:\Users\Manur\OneDrive\Escritorio\Proyecto cC++\socios.h</Transaction>
+    <Transaction>2025/05/23 15:05:28.000.393,=C:\Users\Manur\OneDrive\Escritorio\Proyecto cC++\OKCANCL2.cpp</Transaction>
+    <Transaction>2025/05/23 15:06:02.000.772,=C:\Users\Manur\OneDrive\Escritorio\Proyecto cC++\Unit2.cpp</Transaction>
+    <Transaction>2025/05/23 15:08:38.000.341,=C:\Users\Manur\OneDrive\Escritorio\Proyecto cC++\Unit3.cpp</Transaction>
+    <Transaction>2025/05/24 21:53:36.000.845,=C:\Users\Manur\OneDrive\Escritorio\Proyecto cC++\Unit2.cpp</Transaction>
+    <Transaction>2025/05/25 15:03:44.000.896,=C:\Users\Manur\OneDrive\Escritorio\Proyecto cC++\libros.cpp</Transaction>
+    <Transaction>2025/05/25 15:04:00.000.238,=C:\Users\Manur\OneDrive\Escritorio\Proyecto cC++\libros.h</Transaction>
+    <Transaction>2025/06/11 15:05:36.000.248,=C:\Users\Lucas Serrano\Desktop\INTERFAZ BIBLIOTECA EDA2\Proyecto cC++\Unit3.cpp</Transaction>
+    <Transaction>2025/06/13 19:46:55.000.346,=C:\Users\Lucas Serrano\Desktop\INTERFAZ BIBLIOTECA EDA2\Proyecto cC++\Unit4.cpp</Transaction>
+  </Transactions>
+</BorlandProject>

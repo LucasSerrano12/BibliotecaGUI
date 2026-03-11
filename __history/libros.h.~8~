@@ -1,0 +1,57 @@
+#ifndef LIBROS_H
+#define LIBROS_H
+#include "socios.h"
+#include<stdio.h>
+#include<string>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+
+using namespace std;
+
+struct Estructura_Libros{
+	int Id;
+	string Nombre;
+	string Area;
+	string SubArea;
+	string Autores;
+	string Editorial;
+	string AnoPublicacion;
+	string Estado;
+	int CantidadDisponible;
+	string ubicacion;
+
+};
+struct NodoLibros
+{
+	Estructura_Libros datos_libros;
+	NodoLibros* siguiente;
+};
+
+class Libros {
+	
+public:
+	
+	Libros();
+	virtual ~Libros();
+	NodoLibros * PrimerNodo1;
+	 void CargarLibrosDesdecsv();
+	 void AgregarLibrosALista(Estructura_Libros datos);
+	 void AgregarLibrosCSV(struct Estructura_Libros datos);
+	 void MostrarLibrosEnlistados();
+	 int DarDeBajaLibro(int);
+	 void GuardarListaLibrosEnCSV();
+	 void RealizarPrestamo(Socios &objsocios);
+	 void modificarlibros();
+	 void guardarprestamo();
+	 void buscarlibro();
+	 int ContarLibros();
+	 int leerarchivoprestamo();
+
+
+	       
+private:
+	
+};
+
+#endif

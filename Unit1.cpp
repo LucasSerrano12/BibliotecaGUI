@@ -1,0 +1,92 @@
+//-----------------------IMPLEMENTACION FORMULARIO 1----------------------------------------------------
+
+#include <vcl.h>
+#pragma hdrstop
+#include "libros.h"
+#include "socios.h"
+#include "Unit1.h"
+#include "Unit2.h"
+#include "Unit3.h"
+#include "Unit4.h"
+#include <string>
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.dfm"
+using namespace std;
+TForm1 *Form1;
+//------------------------CTOR---------------------------------------------------
+__fastcall TForm1::TForm1(TComponent* Owner): TForm(Owner)
+{
+	listaSocios.CargarSociosDesdecsv(); // si no lo cargaste aún
+	int cantidadSocios = listaSocios.contarSocios();
+	Texto_SociosReg->Caption = "Socios Registrados: "+ IntToStr(cantidadSocios);
+
+	listaLibros.CargarLibrosDesdecsv(); // si no lo cargaste aún
+	int cantidadLibros = listaLibros.ContarLibros();
+	Texto_CantLibros->Caption = "Libros Registrados: "+ IntToStr(cantidadLibros);
+
+	int cantidadPrestamos = listaLibros.leerarchivoprestamo();
+	Texto_PrestRealiz->Caption = "Prestamos Realizados: "+ IntToStr(cantidadPrestamos);
+
+	}
+
+
+//---------------------BOTON SALIR-----------------------------------------------------
+void __fastcall TForm1::BtnSalirClick(TObject *Sender)
+{
+					   Application->Terminate();
+}
+//----------------------BOTON CON MENU DESPLEGABLE-----------------------------------------------------
+void __fastcall TForm1::btnOpcionesClick(TObject *Sender)
+{
+   // Mostrar el menú justo debajo del botón
+	TPoint punto = btnOpciones->ClientToScreen(Point(0, btnOpciones->Height));
+	PopupOpciones->Popup(punto.x, punto.y);
+}
+
+//----------------------TRANSFORMAR LA HORA MEDIDA EN TIEMPO REAL A STRING-----------------------------------------------------
+
+void __fastcall TForm1::TimerHoraTimer(TObject *Sender)
+{
+	TDateTime fechaHora = Now();   //obtengo hora actual
+
+    lblHora->Caption = "Hora: " + TimeToStr(fechaHora);
+    lblFecha->Caption = "Fecha: " + DateToStr(fechaHora);
+}
+
+//-------------------------OPC MENU DESP ADM LIBROS--------------------------------------------------
+
+void __fastcall TForm1::itmAdministrarLibrosClick(TObject *Sender)
+{
+	this->Hide();         // Oculta el formulario principal
+	Form3->ShowModal();   // Muestra el formulario de libros
+	this->Show();
+}
+
+//----------------------------OPC MENU DESP ADM SOCIOS-----------------------------------------------
+
+void __fastcall TForm1::itmAdministrarSociosClick(TObject *Sender)
+{
+ this->Hide();
+ Form2->ShowModal();  // abre el formulario como una ventana modal bloquea
+ this->Show();
+
+}
+//-------------------------------OPC MENU DESP ADM PRESTAMOS--------------------------------------------
+
+void __fastcall TForm1::itmAdministrarPrestamosClick(TObject *Sender)
+{
+     this->Hide();         // Oculta el formulario principal
+	Form4->ShowModal();   // Muestra el formulario de libros
+	this->Show();
+}
+//---------------------------------------------------------------------------
+
+
+
+void __fastcall TForm1::BtnAyudaClick(TObject *Sender)
+{
+ShellExecute(NULL, L"open", L"Manual_Usuario_Biblioteca.docx", NULL, NULL, SW_SHOWNORMAL);
+}
+//---------------------------------------------------------------------------
+

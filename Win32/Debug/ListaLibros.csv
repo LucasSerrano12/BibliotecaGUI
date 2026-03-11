@@ -1,0 +1,71 @@
+73,messi,futbol,Pasillo General,cancha11,damianypepe,noloe,1999,bien,9
+69,Principles of Digital Communication,Ingenieria,Pasillo 2,Comunicaciones digitales,J. R. Barry-E. A. Lee-D. G. Messerschmitt,Springer,2004,bien,5
+68,Introduction to Artificial Intelligence,Informatica,Pasillo 5,Inteligencia artificial,Wolfgang Ertel,Springer,2018,regular,10
+67,Advanced Thermodynamics,Ingenieria,Pasillo 2,Termodinamica,Gabriel S. R. G. S. Rathnasiri,Springer,2016,regular,9
+66,Engineering Vibration,Ingenieria,Pasillo 2,Vibraciones,Daniel J. Inman,Pearson,2013,malo,1
+65,Nonlinear Dynamics and Chaos,Fisica,Pasillo 4,Dinamica no lineal,Steven H. Strogatz,Perseus Books,2000,malo,6
+64,Introduction to Quantum Mechanics,Fisica,Pasillo 4,Mecanica cuantica,David J. Griffiths,Pearson,2017,regular,4
+63,Fundamentals of Digital Logic with Verilog Design,Ingenieria,Pasillo 2,Electronica digital,Stephen Brown-Zvonko Vranesic,McGraw-Hill,2005,destruido,10
+62,Introduction to Machine Learning,Informatica,Pasillo 5,Aprendizaje automatico,Ethem Alpaydin,MIT Press,2010,regular,2
+61,Introduction to Modern Cryptography,Informatica,Pasillo 5,Criptografia,Jonathan Katz-Yehuda Lindell,Springer,2007,malo,5
+60,Advanced Engineering Mathematics,Matematicas,Pasillo 1,Matematicas aplicadas,Erwin Kreyszig,Wiley,2011,regular,1
+59,Chemical Engineering: Principles,Ingenieria,Pasillo 2,Quimica,Peter Smith,McGraw-Hill,2004,malo,6
+58,Engineering Fluid Mechanics,Ingenieria,Pasillo 2,Mecanica de fluidos,Donald F. Young-Bruce R. Munson-Theodore H. Okiishi,Wiley,2010,bien,7
+57,Physics for Scientists and Engineers,Fisica,Pasillo 4,General,Raymond A. Serway-John W. Jewett,Brooks/Cole,2014,bien,7
+56,Applied Math for Engineers,Matematicas,Pasillo 1,Matematicas aplicadas,Richard M. Hill,Cambridge University Press,2015,bien,6
+55,Introduction to Probability and Statistics,Matematicas,Pasillo 1,Probabilidad y estadistica,William Mendenhall-Robert J. Beaver-Barbara M. Beaver,Cengage Learning,2013,malo,3
+54,Mathematical Methods for Engineers,Matematicas,Pasillo 1,Metodos matematicos,Erwin Kreyszig,Wiley,2011,malo,3
+53,Mechanics of Materials,Ingenieria,Pasillo 2,Materiales,R.C. Hibbeler,Pearson,2011,regular,1
+52,Concrete Structures,Ingenieria,Pasillo 2,Estructuras de concreto,Arthur H. Nilson-David Darwin-Charles W. Dolan,Pearson,2012,regular,10
+51,Introduction to Data Mining,Informatica,Pasillo 5,Mineria de datos,Pang-Ning Tan-Michael Steinbach-Vipin Kumar,Pearson,2005,malo,7
+50,Advanced Programming in C,Informatica,Pasillo 5,Programacion,Peter van der Linden,Prentice Hall,1994,malo,2
+49,Design and Analysis of Algorithms,Informatica,Pasillo 5,Diseno de algoritmos,Dexter C. Kozen,Springer,2014,malo,1
+48,Digital Signal Processing,Ingenieria,Pasillo 2,Senales y sistemas,Alan V. Oppenheim-Ronald W. Schafer,Prentice Hall,2009,malo,1
+47,Introduction to Robotics: Mechanics and Control,Ingenieria,Pasillo 2,Robotica,John J. Craig,Pearson,2005,bien,3
+46,Applied Electromagnetism,Ingenieria,Pasillo 2,Electromagnetismo,John D. Kraus,McGraw-Hill,2004,malo,8
+45,Introduction to Electrodynamics,Fisica,Pasillo 4,Electrodinamica,David J. Griffiths,Pearson,2017,malo,3
+44,Classical Mechanics,Fisica,Pasillo 4,Mecanica clasica,Herbert Goldstein-Charles Poole-John Safko,Pearson,2002,malo,9
+43,Fundamentals of Fluid Mechanics,Ingenieria,Pasillo 2,Mecanica de fluidos,Bruce R. Munson-Donald F. Young-Theodore H. Okiishi,Wiley,2012,regular,4
+42,Complex Analysis,Matematicas,Pasillo 1,Analisis complejo,Elias M. Stein-Rami Shakarchi,Princeton University Press,2003,regular,1
+41,Introduction to the Theory of Probability,Matematicas,Pasillo 1,Probabilidad,Harold J. Larson,Oxford University Press,2013,bien,1
+40,Advanced Strength and Applied Stress Analysis,Ingenieria,Pasillo 2,Mecanica estructural,Richard G. Budynas-Keith J. Nisbett,McGraw-Hill,2011,malo,7
+39,Introduction to Statistical Thermodynamics,Fisica,Pasillo 4,Termodinamica estadistica,Richard E. Sonntag-Claus Borgnakke,Wiley,2003,bien,9
+38,Essentials of Biochemistry,Biologia,Pasillo 6,Bioquimica,Jeremy M. Berg-John L. Tymoczko-Lubert Stryer,W. H. Freeman,2012,regular,7
+37,Introductory Circuit Analysis,Ingenieria,Pasillo 2,Electronica,Robert L. Boylestad,Pearson,2012,malo,7
+36,Chemistry: The Central Science,Quimica,Pasillo 3,General,Theodore L. Brown-H. Eugene LeMay-Bruce E. Bursten-Catherine J. L.,Pearson,2017,regular,10
+35,Introduction to Software Engineering,Informatica,Pasillo 5,Ingenieria de software,Ian Sommerville,Pearson,2015,malo,7
+34,Fundamentals of Database Systems,Informatica,Pasillo 5,Bases de datos,Ramez Elmasri-Shamkant B. Navathe,Pearson,2015,regular,3
+33,Digital Design,Ingenieria,Pasillo 2,Electronica digital,M. Morris Mano-Michael D. Ciletti,Pearson,2017,regular,10
+32,Applied Linear Algebra,Matematicas,Pasillo 1,Algebra lineal,Peter J. Olver-Chehrzad Shakiban,Prentice Hall,2014,malo,9
+31,Environmental Science,Ciencias,Pasillo 7,Medio ambiente,Daniel B. Botkin-Edward A. Keller,Wiley,2014,malo,4
+30,Introduction to Environmental Engineering,Ingenieria,Pasillo 2,Ambiental,Mackenzie L. Davis-David A. Cornwell,McGraw-Hill,2011,malo,6
+29,Genetic Engineering: Principles and Methods,Biologia,Pasillo 6,Ingenieria genetica,Jane K. Setlow,Springer,2011,malo,9
+28,Principles of Genetics,Biologia,Pasillo 6,Genetica,D. Peter Snustad-Michael J. Simmons,Wiley,2015,regular,9
+27,Biochemistry,Biologia,Pasillo 6,Bioquimica,Jeremy M. Berg-John L. Tymoczko-Lubert Stryer,W. H. Freeman,2015,malo,5
+26,Introduction to Solid State Physics,Fisica,Pasillo 4,Fisica del estado solido,Charles Kittel,Wiley,2004,regular,7
+25,Quantum Mechanics: Concepts and Applications,Fisica,Pasillo 4,Mecanica cuantica,Nouredine Zettili,Wiley,2009,malo,7
+24,Introduction to Modern Optics,Fisica,Pasillo 4,Optica,Grant R. Fowles,Dover Publications,1989,bien,3
+23,Fundamentals of Thermodynamics,Ingenieria,Pasillo 2,Termodinamica,Richard E. Sonntag-Claus Borgnakke,Wiley,2008,regular,5
+22,Electrical Engineering: Principles and Applications,Ingenieria,Pasillo 2,Electrica,Allan R. Hambley,Pearson,2013,malo,4
+21,Introduction to Electrical Engineering,Ingenieria,Pasillo 2,Electrica,Mulukutla S. Sarma,Wiley,2011,malo,5
+20,Modern Control Engineering,Ingenieria,Pasillo 2,Control automatico,Ogata Katsuhiko,Prentice Hall,2010,bien,8
+19,Artificial Intelligence: Foundations of Computational Agents,Informatica,Pasillo 5,Inteligencia artificial,David L. Poole-Alan Mackworth,Cambridge University Press,2010,regular,9
+18,Artificial Intelligence: A Modern Approach,Informatica,Pasillo 5,Inteligencia artificial,Stuart Russell-Peter Norvig,Pearson,2010,malo,8
+17,Advanced Programming in the UNIX Environment,Informatica,Pasillo 5,Programacion,W. Richard Stevens-Stephen A. Rago,Addison-Wesley,2013,regular,8
+16,Computer Networking: A Top-Down Approach,Informatica,Pasillo 5,Redes,James F. Kurose-Keith W. Ross,Pearson,2017,malo,10
+15,Principles of Mathematical Analysis,Matematicas,Pasillo 1,Analisis matematico,Walter Rudin,McGraw-Hill,1976,regular,8
+14,Topology,Matematicas,Pasillo 1,Topologia,James Munkres,Pearson,2000,regular,4
+13,Calculus: Early Transcendentals,Matematicas,Pasillo 1,Calculo,James Stewart,Brooks/Cole,2015,bien,5
+12,Linear Algebra and Its Applications,Matematicas,Pasillo 1,Algebra lineal,David C. Lay,Pearson,2012,bien,8
+11,Discrete Mathematics,Matematicas,Pasillo 1,Matematicas discretas,Richard Johnsonbaugh,Pearson,2010,bien,7
+10,Introduction to Algorithms,Informatica,Pasillo 5,Algoritmos,Thomas H. Cormen-Charles E. Leiserson-Ronald L. Rivest-Clifford Stein,MIT Press,2009,bien,7
+9,Introduction to the Theory of Computation,Informatica,Pasillo 5,Teoria de la computacion,Michael Sipser,Cengage Learning,2012,regular,2
+8,Electric Circuits,Ingenieria,Pasillo 2,Electronica,James W. Nilsson-Susan Riedel,Pearson,2014,malo,10
+7,Signals and Systems,Ingenieria,Pasillo 2,Electronica,Alan V. Oppenheim-Alan S. Willsky,Pearson,1997,destruido,2
+6,Electromagnetic Waves,Fisica,Pasillo 4,Ondas electromagneticas,S. Ramo-J. Whinnery-T. Van Duzer,Wiley,1994,malo,2
+5,Fluid Mechanics,Ingenieria,Pasillo 2,Mecanica de fluidos,Frank M. White,McGraw-Hill,2011,bien,1
+4,Engineering Mechanics: Dynamics,Ingenieria,Pasillo 2,Mecanica,J.L. Meriam-L.G. Kraige,Wiley,2015,regular,6
+3,Introduction to Chemical Engineering,Ingenieria,Pasillo 2,Quimica,J. M. Smith-H. C. Van Ness-M. M. Abbott,McGraw-Hill,2004,bien,8
+2,Organic Chemistry,Quimica,Pasillo 3,Organica,David R. Klein,Wiley,2017,malo,4
+1,Principles of Chemistry,Quimica,Pasillo 3,General,Peter Atkins-Loretta Jone,Oxford University Pres,2010,bueno,9
+70,papasito,mitologia,Pasillo General,griego,homero,nolose,2010,bien,4

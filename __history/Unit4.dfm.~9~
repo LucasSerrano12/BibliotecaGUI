@@ -1,0 +1,201 @@
+object Form4: TForm4
+  Left = 0
+  Top = 0
+  Caption = 'Form4'
+  ClientHeight = 624
+  ClientWidth = 1101
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  TextHeight = 15
+  object PageControl1: TPageControl
+    Left = -5
+    Top = 0
+    Width = 1118
+    Height = 667
+    ActivePage = TabSheet1
+    TabOrder = 0
+    object TabSheet1: TTabSheet
+      Caption = 'Prestamos'
+      object Label1: TLabel
+        Left = 32
+        Top = 97
+        Width = 89
+        Height = 29
+        Caption = 'Apellido'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clTeal
+        Font.Height = -24
+        Font.Name = 'Constantia'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label2: TLabel
+        Left = 32
+        Top = 167
+        Width = 147
+        Height = 29
+        Caption = 'Area del Libro'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clTeal
+        Font.Height = -24
+        Font.Name = 'Constantia'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label3: TLabel
+        Left = 32
+        Top = 236
+        Width = 183
+        Height = 29
+        Caption = 'Nombre del libro '
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clTeal
+        Font.Height = -24
+        Font.Name = 'Constantia'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label4: TLabel
+        Left = 456
+        Top = 97
+        Width = 160
+        Height = 29
+        Caption = 'Dias a Reservar'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clTeal
+        Font.Height = -24
+        Font.Name = 'Constantia'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label5: TLabel
+        Left = 456
+        Top = 167
+        Width = 208
+        Height = 29
+        Caption = 'Fecha  del prestamo'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clTeal
+        Font.Height = -24
+        Font.Name = 'Constantia'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Casillaapellidomod: TEdit
+        Left = 232
+        Top = 97
+        Width = 129
+        Height = 34
+        Color = clLightcyan
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -21
+        Font.Name = 'Constantia'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+      end
+      object Casillaareamod: TEdit
+        Left = 232
+        Top = 167
+        Width = 129
+        Height = 34
+        Color = clLightcyan
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -21
+        Font.Name = 'Constantia'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+      end
+      object Casillanombremod: TEdit
+        Left = 232
+        Top = 231
+        Width = 193
+        Height = 34
+        Color = clLightcyan
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -21
+        Font.Name = 'Constantia'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 2
+      end
+      object Casilladiasmod: TEdit
+        Left = 680
+        Top = 97
+        Width = 65
+        Height = 34
+        Color = clLightcyan
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -21
+        Font.Name = 'Constantia'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 3
+      end
+      object fechaprestamomod: TDatePicker
+        Left = 720
+        Top = 167
+        Date = 45821.000000000000000000
+        DateFormat = 'd/m/yyyy'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        MaxYear = 2025
+        MinYear = 2025
+        TabOrder = 4
+      end
+      object Button1: TButton
+        Left = 559
+        Top = 280
+        Width = 105
+        Height = 41
+        Caption = 'Reservar'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Constantia'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 5
+        OnClick = Button1Click
+      end
+      object Panel1: TPanel
+        Left = 0
+        Top = -8
+        Width = 1097
+        Height = 49
+        Caption = 'REALIZAR PRESTAMOS'
+        Color = clDarkcyan
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -21
+        Font.Name = 'Constantia'
+        Font.Style = [fsBold]
+        ParentBackground = False
+        ParentFont = False
+        TabOrder = 6
+      end
+      object Panel2: TPanel
+        Left = 0
+        Top = 557
+        Width = 1110
+        Height = 49
+        Align = alCustom
+        Color = clTeal
+        ParentBackground = False
+        TabOrder = 7
+      end
+    end
+  end
+end

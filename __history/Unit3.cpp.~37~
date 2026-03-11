@@ -1,0 +1,288 @@
+//---------------------------------------------------------------------------
+
+#include <vcl.h>
+#pragma hdrstop
+#include "libros.h"
+#include "socios.h"
+#include "Unit3.h"
+#include <string>
+#include <Grids.hpp>
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.dfm"
+TForm3 *Form3;
+//---------------------------------------------------------------------------
+__fastcall TForm3::TForm3(TComponent* Owner)
+	: TForm(Owner)
+{
+		   listaLibros.CargarLibrosDesdecsv();
+}
+//---------------------------------------------------------------------------
+
+
+
+   void __fastcall TForm3::MostrarLibros() {
+	NodoLibros* actual = listaLibros.PrimerNodo1;
+
+	int cantidad = 0;
+	NodoLibros * temp = actual;
+	while (temp != nullptr) {
+		cantidad++;
+		temp = temp->siguiente;
+	}
+
+	PlanillaMostrarLibros->RowCount = cantidad + 1;
+
+	// Opcional: agregar encabezados si es la primera vez
+	PlanillaMostrarLibros->Cells[0][0] = "ID";
+	PlanillaMostrarLibros->Cells[1][0] = "Nombre";
+	PlanillaMostrarLibros->Cells[2][0] = "Area";
+	PlanillaMostrarLibros->Cells[3][0] = "SubArea";
+	PlanillaMostrarLibros->Cells[4][0] = "Autores";
+	PlanillaMostrarLibros->Cells[5][0] = "Editorial";
+	PlanillaMostrarLibros->Cells[6][0] = "Año";
+	PlanillaMostrarLibros->Cells[7][0] = "Estado";
+	PlanillaMostrarLibros->Cells[8][0] = "Cant.";
+	PlanillaMostrarLibros->Cells[9][0] = "Ubicacion";
+
+	int fila = 1;
+	while (actual != nullptr) {
+		PlanillaMostrarLibros->Cells[0][fila] = IntToStr(actual->datos_libros.Id);
+		PlanillaMostrarLibros->Cells[1][fila] = actual->datos_libros.Nombre.c_str();
+		PlanillaMostrarLibros->Cells[2][fila] = actual->datos_libros.Area.c_str();
+		PlanillaMostrarLibros->Cells[3][fila] = actual->datos_libros.SubArea.c_str();
+		PlanillaMostrarLibros->Cells[4][fila] = actual->datos_libros.Autores.c_str();
+		PlanillaMostrarLibros->Cells[5][fila] = actual->datos_libros.Editorial.c_str();
+		PlanillaMostrarLibros->Cells[6][fila] = actual->datos_libros.AnoPublicacion.c_str();
+		PlanillaMostrarLibros->Cells[7][fila] = actual->datos_libros.Estado.c_str();
+		PlanillaMostrarLibros->Cells[8][fila] = IntToStr(actual->datos_libros.CantidadDisponible);
+		PlanillaMostrarLibros->Cells[9][fila] = actual->datos_libros.ubicacion.c_str();
+
+
+
+
+		actual = actual->siguiente;
+		fila++;
+	}
+}
+
+
+
+
+
+void __fastcall TForm3::Button1Click(TObject *Sender)
+{
+       MostrarLibros();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm3::Button2Click(TObject *Sender)
+{
+			  struct Estructura_Libros Datos;
+// Obtener datos desde la interfaz
+	AnsiString ID = Casillaid->Text;
+	AnsiString Nombre = Casillanombre->Text;
+	AnsiString Area = Casillaarea->Text;
+	AnsiString SubArea = Casillasubarea->Text;
+	AnsiString Autores = Casillaautores->Text;
+	AnsiString Editorial = Casillaeditorial->Text;
+	AnsiString AnoPublicacion = Casillaanopublicacion->Text;
+	AnsiString Estado = Casillaestado->Text;
+	AnsiString CantDisponible = Casillacantdisponible->Text;
+	//AnsiString ubicacion = Casillaubicacion->Text;
+
+	// Validación básica
+	if (ID.IsEmpty() || Nombre.IsEmpty() || Area.IsEmpty() || SubArea.IsEmpty()
+	|| Autores.IsEmpty() || Editorial.IsEmpty() || AnoPublicacion.IsEmpty()
+	|| Estado.IsEmpty()|| CantDisponible.IsEmpty())
+		{
+		ShowMessage("Por favor, complete todos los campos.");
+		return;
+		}
+
+	// Convertir a string estándar
+	Datos.Id = stoi(ID.c_str());
+	Datos.Nombre = Nombre.c_str();
+	Datos.Area = Area.c_str();
+	Datos.SubArea = SubArea.c_str();
+	Datos.Autores = Autores.c_str();
+	Datos.Editorial = Editorial.c_str();
+	Datos.AnoPublicacion = AnoPublicacion.c_str();
+	Datos.Estado = Estado.c_str();
+	Datos.CantidadDisponible = stoi(CantDisponible.c_str());
+   //	Datos.ubicacion = ubicacion.c_str();
+
+	listaLibros.AgregarLibrosCSV(Datos);
+
+	// Agregar al StringGrid
+	//	PlanillaAgregarSocio->RowCount++;
+
+	//PlanillaAgregarSocio->Cells[0][0] = apellido;
+	//PlanillaAgregarSocio->Cells[1][0] = genero;
+	//PlanillaAgregarSocio->Cells[2][0] = direccion;
+	//PlanillaAgregarSocio->Cells[3][0] = telefono;
+	//PlanillaAgregarSocio->Cells[4][0] = edad;
+   //	PlanillaAgregarSocio->Cells[5][0] = nacimiento;
+   //	PlanillaAgregarSocio->Cells[6][0] = correo;
+
+		Casillaid->Text="";
+		Casillanombre->Text="";
+		Casillaarea->Text="";
+		Casillasubarea->Text="";
+		Casillaautores->Text="";
+		Casillaeditorial->Text="";
+		Casillaanopublicacion->Text="";
+		Casillaestado->Text="";
+        Casillacantdisponible->Text="";
+
+
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TForm3::BotonEliminarLibroClick(TObject *Sender)
+{
+	  int idaux = stoi(AnsiString(CasillaTextoIDLibro->Text).c_str());
+       listaLibros.DarDeBajaLibro(idaux);
+
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm3::BotonBuscarLibroClick(TObject *Sender)
+{
+	AnsiString Areaaux = CasillaBuscarLibro->Text;
+
+
+	if (Areaaux.IsEmpty()) {
+        ShowMessage("Por favor, complete todos los campos.");
+        return;
+    }
+
+	string areaaux = Areaaux.c_str();
+
+
+	listaLibros.buscarlibro(areaaux, PlanillaBuscarLibros);
+
+
+    CasillaBuscarLibro->Text="";
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TForm3::Button3Click(TObject *Sender)
+{
+PlanillaBuscarLibrosModificar->ColCount = 2; // columna 0 = cabecera, columna 1 = datos
+	PlanillaBuscarLibrosModificar->RowCount = 9; // una fila por cada campo
+
+	// Cabeceras verticales
+	PlanillaBuscarLibrosModificar->Cells[0][0] = "ID";
+	PlanillaBuscarLibrosModificar->Cells[0][1] = "Nombre";
+	PlanillaBuscarLibrosModificar->Cells[0][2] = "Area";
+	PlanillaBuscarLibrosModificar->Cells[0][3] = "SubArea";
+	PlanillaBuscarLibrosModificar->Cells[0][4] = "Autores";
+	PlanillaBuscarLibrosModificar->Cells[0][5] = "Editorial";
+	PlanillaBuscarLibrosModificar->Cells[0][6] = "Año";
+	PlanillaBuscarLibrosModificar->Cells[0][7] = "Estado";
+	PlanillaBuscarLibrosModificar->Cells[0][8] = "Cant";
+
+	NodoLibros* actual = listaLibros.getPrimerNodo1();
+	int IDModificar = stoi(AnsiString(CasillaIdBuscarLibroModificar->Text).c_str());
+
+	while (actual != nullptr)
+	{
+		if (actual->datos_libros.Id == IDModificar)
+		{
+			// Datos en columna 1
+			PlanillaBuscarLibrosModificar->Cells[1][0] = IntToStr(actual->datos_libros.Id);
+			PlanillaBuscarLibrosModificar->Cells[1][1] = actual->datos_libros.Nombre.c_str();
+			PlanillaBuscarLibrosModificar->Cells[1][2] = actual->datos_libros.Area.c_str();
+			PlanillaBuscarLibrosModificar->Cells[1][3] = actual->datos_libros.SubArea.c_str();
+			PlanillaBuscarLibrosModificar->Cells[1][4] = actual->datos_libros.Autores.c_str();
+			PlanillaBuscarLibrosModificar->Cells[1][5] = actual->datos_libros.Editorial.c_str();
+			PlanillaBuscarLibrosModificar->Cells[1][6] = actual->datos_libros.AnoPublicacion.c_str();
+			PlanillaBuscarLibrosModificar->Cells[1][7] = actual->datos_libros.Estado.c_str();
+			PlanillaBuscarLibrosModificar->Cells[1][8] = IntToStr(actual->datos_libros.CantidadDisponible);
+			return;
+		}
+		actual = actual->siguiente;
+	}
+	ShowMessage("No se encontraron coincidencias.");
+
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TForm3::PlanillaBuscarLibrosModificarClick(TObject *Sender)
+{
+int columna = PlanillaBuscarLibrosModificar->Col;
+	if (columna == 0)
+	{
+	return;
+	}
+	 // evitar modificar cabeceras
+
+	// Cargar datos desde la columna 1 (fila por fila)
+	CasillaIdModificarLibro->Text = PlanillaBuscarLibrosModificar->Cells[1][0];
+	CasillaNombreModificarLibro->Text = PlanillaBuscarLibrosModificar->Cells[1][1];
+	CasillaAreaModificarLibro->Text = PlanillaBuscarLibrosModificar->Cells[1][2];
+	CasillaSubAreaModificarLibro->Text = PlanillaBuscarLibrosModificar->Cells[1][3];
+	CasillaAutoresModificarLibro->Text = PlanillaBuscarLibrosModificar->Cells[1][4];
+	CasillaEditorialModificarLibro->Text = PlanillaBuscarLibrosModificar->Cells[1][5];
+	CasillaAnoPublicacionModificarLibro->Text = PlanillaBuscarLibrosModificar->Cells[1][6];
+	CasillaEstadoModificarLibro->Text = PlanillaBuscarLibrosModificar->Cells[1][7];
+	CasillaCantidadModificarLibro->Text = PlanillaBuscarLibrosModificar->Cells[1][8];
+
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TForm3::Button4Click(TObject *Sender)
+{
+
+    // Buscar libro por ID
+	int IDModificar = stoi(AnsiString(CasillaIdBuscarLibroModificar->Text).c_str());
+
+	NodoLibros* actual = listaLibros.getPrimerNodo1();
+	while (actual != nullptr)
+	{
+		if (actual->datos_libros.Id == IDModificar)
+		{
+			// Modificar campos
+			actual->datos_libros.Id = stoi(AnsiString(CasillaIdModificarLibro->Text).c_str());
+			actual->datos_libros.Nombre = AnsiString(CasillaNombreModificarLibro->Text).c_str();
+			actual->datos_libros.Area = AnsiString(CasillaAreaModificarLibro->Text).c_str();
+			actual->datos_libros.SubArea = AnsiString(CasillaSubAreaModificarLibro->Text).c_str();
+			actual->datos_libros.Autores = AnsiString(CasillaAutoresModificarLibro->Text).c_str();
+			actual->datos_libros.Editorial = AnsiString(CasillaEditorialModificarLibro->Text).c_str();
+			actual->datos_libros.AnoPublicacion = AnsiString(CasillaAnoPublicacionModificarLibro->Text).c_str();
+			actual->datos_libros.Estado = AnsiString(CasillaEstadoModificarLibro->Text).c_str();
+			actual->datos_libros.CantidadDisponible = stoi(AnsiString(CasillaCantidadModificarLibro->Text).c_str());
+			break;
+		}
+		actual = actual->siguiente;
+	}
+
+	// Guardar cambios en CSV
+	listaLibros.GuardarListaLibrosEnCSV();
+
+    PlanillaLibroModificado->ColCount = 2;
+	PlanillaLibroModificado->RowCount = 9;
+
+
+	PlanillaLibroModificado->Cells[0][0] = CasillaIdModificarLibro->Text;
+	PlanillaLibroModificado->Cells[0][1] = CasillaNombreModificarLibro->Text;
+	PlanillaLibroModificado->Cells[0][2] = CasillaAreaModificarLibro->Text;
+	PlanillaLibroModificado->Cells[0][3] = CasillaSubAreaModificarLibro->Text;
+	PlanillaLibroModificado->Cells[0][4] = CasillaAutoresModificarLibro->Text;
+	PlanillaLibroModificado->Cells[0][5] = CasillaEditorialModificarLibro->Text;
+	PlanillaLibroModificado->Cells[0][6] = CasillaAnoPublicacionModificarLibro->Text;
+	PlanillaLibroModificado->Cells[0][7] = CasillaEstadoModificarLibro->Text;
+	PlanillaLibroModificado->Cells[0][8] = CasillaCantidadModificarLibro->Text;
+
+	ShowMessage("Modificación realizada.");
+
+}
+//---------------------------------------------------------------------------
+
+
+

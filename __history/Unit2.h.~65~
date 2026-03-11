@@ -1,0 +1,112 @@
+//---------------------------------------------------------------------------
+
+#ifndef Unit2H
+#define Unit2H
+//---------------------------------------------------------------------------
+#include <System.Classes.hpp>
+#include <Vcl.Controls.hpp>
+#include <Vcl.StdCtrls.hpp>
+#include <Vcl.Forms.hpp>
+#include <Vcl.Grids.hpp>
+#include <Vcl.ComCtrls.hpp>
+#include <Vcl.ExtCtrls.hpp>
+#include <Vcl.Imaging.pngimage.hpp>
+#include <Vcl.WinXPickers.hpp>
+#include <Grids.hpp>
+//---------------------------------------------------------------------------
+class TForm2 : public TForm
+{
+__published:	// IDE-managed Components
+	TPageControl *PageControl1;
+	TTabSheet *PaginaAgregarSocio;
+	TImage *Image1;
+	TLabel *TextoApellido;
+	TLabel *TextoGenero;
+	TLabel *textoDireccion;
+	TLabel *textoNumeroTel;
+	TLabel *TextoFechaNac;
+	TLabel *TextoEdad;
+	TLabel *textoCorreoElectronico;
+	TPanel *Panel1;
+	TRadioButton *GeneroM;
+	TRadioButton *GeneroF;
+	TEdit *CasillaApellido;
+	TEdit *CasillaDireccion;
+	TEdit *CasillaTelefono;
+	TEdit *CasillaEdad;
+	TDatePicker *CasillaFechaNac;
+	TEdit *CasillaCorreo;
+	TButton *BotonRegistrarAgregarSocio;
+	TTabSheet *PaginaMostrarSocio;
+	TStringGrid *PlanillaMostrarSocio;
+	TPanel *Panel2;
+	TButton *BotonVerMostrarSocios;
+	TButton *BotonActualizarSocios;
+	TButton *BotonVolverMostrarSocios;
+	TTabSheet *PaginaEliminarSocio;
+	TLabel *Label8;
+	TLabel *Label9;
+	TImage *Image3;
+	TPanel *Panel3;
+	TEdit *TeditApellidoBuscarEliminar;
+	TEdit *TeditEdadBuscarEliminar;
+	TStringGrid *PlanillaEliminarSocio;
+	TButton *BotonEliminarSocio;
+	TButton *BotonVolverEliminarSocio;
+	TTabSheet *PaginaModificarSocio;
+	TPanel *Panel4;
+	TButton *BotonModificarSocio;
+	TTabSheet *PaginaBuscarSocio;
+	TLabel *Label10;
+	TLabel *Label11;
+	TImage *Image5;
+	TPanel *Panel5;
+	TButton *Button2;
+	TEdit *CasillaApellidoBuscar;
+	TEdit *CasillaEdadBuscar;
+	TButton *BotonVolverBuscarSocio;
+	TStringGrid *StringGrid1;
+	TEdit *CasillaApellidoModSocios;
+	TEdit *CasApellido;
+	TEdit *CasDireccion;
+	TEdit *CasTelefono;
+	TEdit *CasEdad;
+	TEdit *CasFechaNacimiento;
+	TEdit *CasCorreo;
+	TLabel *Label1;
+	TLabel *Label2;
+	TLabel *Label3;
+	TLabel *Label4;
+	TLabel *Label5;
+	TLabel *Label6;
+	TEdit *CasillaApellidoModificarSocio;
+	TEdit *CasillaEdadModificarSocio;
+	TButton *ButtonBuscarSocios;
+	TStringGrid *PlanillaBuscarSociosModificar;
+	TStringGrid *PlanillaSocioModificado;
+	TPanel *Panel6;
+	void __fastcall BotonVerMostrarSociosClick(TObject *Sender);
+	void __fastcall BotonRegistrarAgregarSocioClick(TObject *Sender);
+    void __fastcall BotonVolverAgregarSocioClick(TObject *Sender);
+	void __fastcall BotonEliminarSocioClick(TObject *Sender);
+	//void __fastcall PageControl1Change(TObject *Sender);
+	//void __fastcall Label10Click(TObject *Sender);
+	void __fastcall Button2Click(TObject *Sender);
+	void __fastcall ButtonBuscarSociosClick(TObject *Sender);
+	void __fastcall BotonModificarSocioClick(TObject *Sender);
+   //	void __fastcall Panel5Click(TObject *Sender);
+	//void __fastcall StringGrid1Click(TObject *Sender);
+
+private:
+
+public:
+void __fastcall MostrarSocios();
+Socios listaSocios;
+  Libros listaLibros;
+
+	__fastcall TForm2(TComponent* Owner);
+};
+//---------------------------------------------------------------------------
+extern PACKAGE TForm2 *Form2;
+//---------------------------------------------------------------------------
+#endif

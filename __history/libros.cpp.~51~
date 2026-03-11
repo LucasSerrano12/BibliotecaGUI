@@ -1,0 +1,600 @@
+﻿#include "libros.h"
+#include "socios.h"
+#include <string>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <algorithm>
+#include "Unit3.h"
+#include <Grids.hpp>
+
+using namespace std;
+
+Libros::Libros() {
+
+	PrimerNodo1 = nullptr;
+}
+
+Libros::~Libros() {
+
+}
+void Libros::AgregarLibrosALista(Estructura_Libros datos) {
+	NodoLibros* nuevoNodo = new NodoLibros;
+	nuevoNodo->datos_libros = datos;
+	nuevoNodo->siguiente = PrimerNodo1;
+	PrimerNodo1 = nuevoNodo;
+
+}
+
+int Libros::ContarLibros(){
+
+int contador = 0;
+
+	NodoLibros* actual = PrimerNodo1;
+	while (actual != nullptr) {
+		contador++;
+		actual = actual->siguiente;
+	}
+	return contador;
+}
+
+void Libros::CargarLibrosDesdecsv() {
+
+	string registro;
+	string idaux;
+	string auxcantdisponible;
+
+	Estructura_Libros datos;
+
+	fstream ArchivoLibros("ListaLibros.csv", ios::in);
+	if (!ArchivoLibros) {
+		cout << "error al abrir el archivo ListaLibros en modo lectura";
+		return;
+	}
+
+	while (getline(ArchivoLibros, registro)) {
+
+
+
+		stringstream token(registro);
+		getline(token, idaux, ',');
+		datos.Id = stoi(idaux);
+		getline(token, datos.Nombre, ',');
+		getline(token, datos.Area, ',');
+		getline(token,datos.ubicacion,',');
+		getline(token, datos.SubArea, ',');
+		getline(token, datos.Autores, ',');
+		getline(token, datos.Editorial, ',');
+		getline(token, datos.AnoPublicacion, ',');
+		getline(token, datos.Estado, ',');
+		getline(token, auxcantdisponible, ',');
+		datos.CantidadDisponible = stoi(auxcantdisponible);
+
+		AgregarLibrosALista(datos);
+	}
+
+	ArchivoLibros.close();
+
+
+
+}
+void Libros::MostrarLibrosEnlistados() {
+	NodoLibros * actual = PrimerNodo1;
+
+	cout << "LIBROS ENLISTADOS" << endl;
+	while (actual != nullptr) {
+
+
+		cout << "ID:" << actual->datos_libros.Id << endl;
+		cout << "Nombre:" << actual->datos_libros.Nombre << endl;
+		cout << "Area:" << actual->datos_libros.Area << endl;
+		cout << "Ubicacion"<< actual->datos_libros.ubicacion<<endl;
+		cout << "SubArea:" << actual->datos_libros.SubArea << endl;
+		cout << "Autores:" << actual->datos_libros.Autores << endl;
+		cout << "Editorial:" << actual->datos_libros.Editorial << endl;
+		cout << "Ano de publicacion:" << actual->datos_libros.AnoPublicacion << endl;
+		cout << "Estado:" << actual->datos_libros.Estado << endl;
+		actual = actual->siguiente;
+		cout << "\n\n";
+
+	}
+
+
+
+}
+
+
+void Libros::AgregarLibrosCSV(struct Estructura_Libros Datos) {
+
+
+
+	int bandera;
+	do {
+		bandera = 0;
+
+		NodoLibros*actual = PrimerNodo1;
+		while (actual != nullptr && bandera != 1) {
+			if (Datos.Id == actual->datos_libros.Id) {
+					ShowMessage("El ID Ya existe , Ingrese otro.");
+					return;
+				bandera = 1;
+			}
+			 else if(Datos.Estado!="bien"&&Datos.Estado!="regular"&&Datos.Estado!="malo"&&Datos.Estado!="destruido")
+			{
+					 ShowMessage("El estado que escribiste no existe , Ingrese otro.");
+					return;
+                    bandera=1;
+			}
+
+			else {
+				bandera = 0;
+			}
+			actual = actual->siguiente;
+		}
+
+	} while (bandera == 1);
+
+
+	if (Datos.Area == "Matematicas") {
+		Datos.ubicacion = "Pasillo 1";
+	} else if (Datos.Area == "Ingenieria") {
+		Datos.ubicacion = "Pasillo 2";
+	} else if (Datos.Area == "Quimica") {
+		Datos.ubicacion = "Pasillo 3";
+	} else if (Datos.Area == "Fisica") {
+		Datos.ubicacion = "Pasillo 4";
+	} else if (Datos.Area == "Informatica") {
+		Datos.ubicacion = "Pasillo 5";
+	} else if (Datos.Area == "Biologia") {
+		Datos.ubicacion = "Pasillo 6";
+	} else if (Datos.Area == "Ciencias") {
+		Datos.ubicacion = "Pasillo 7";
+	} else {
+		Datos.ubicacion = "Pasillo General";
+	}
+
+            ShowMessage("Libro Registrado Exitosamente");
+	AgregarLibrosALista(Datos);
+    
+	
+	fstream ArchivoCodigoBarra("CodigoBarra.csv",ios::app);
+	if(!ArchivoCodigoBarra)
+	{
+		cout<<"error al abrir el archivo CodigodeBarra"<<endl;
+	}
+	
+		ArchivoCodigoBarra<<Datos.Id<<Datos.ubicacion<<Datos.Estado<<Datos.CantidadDisponible<<endl;
+	
+
+	ArchivoCodigoBarra.close();
+	
+
+	fstream ArchivoLibros("ListaLibros.csv", ios::app);
+
+	if (!ArchivoLibros) {
+		cout << "error al abrir el archivo ListaLibros en modo añadir\n";
+		return;
+	}
+
+	ArchivoLibros << Datos.Id << "," << Datos.Nombre << ","
+	              << Datos.Area << "," <<Datos.ubicacion<<","<<Datos.SubArea << "," << Datos.Autores << "," << Datos.Editorial << "," << Datos.AnoPublicacion << "," << Datos.Estado << "," << Datos.CantidadDisponible << endl;
+
+	ArchivoLibros.close();
+
+}
+
+
+int Libros::DarDeBajaLibro(int idaux) {
+
+
+	int bandera = 0;
+
+
+
+	NodoLibros* actual = PrimerNodo1;
+	NodoLibros* anterior = nullptr;
+
+	while (actual != nullptr) {
+		if (idaux == actual->datos_libros.Id) {
+
+			if (anterior == nullptr) {
+
+				PrimerNodo1 = actual->siguiente;
+			} else {
+
+				anterior->siguiente = actual->siguiente;
+
+			}
+
+			delete actual;
+
+
+
+
+			GuardarListaLibrosEnCSV();
+			bandera = 1;
+			ShowMessage("El libro se elimino correctamente");
+			return 1;
+		}
+
+		anterior = actual;
+		actual = actual->siguiente;
+
+
+	}
+	if (bandera == 0) {
+		ShowMessage("El ID Libro Buscado no existe , Ingrese otro.");
+	}
+
+}
+void Libros::GuardarListaLibrosEnCSV() {
+	ofstream ArchivoLibros("ListaLibros.csv");
+	if (!ArchivoLibros) {
+
+		return;
+	}
+
+	NodoLibros* actual = PrimerNodo1;
+	while (actual != nullptr) {
+		ArchivoLibros << actual->datos_libros.Id << ","
+		              << actual->datos_libros.Nombre << "," << actual->datos_libros.Area << ","<<actual->datos_libros.ubicacion<<"," << actual->datos_libros.SubArea << ","
+		              << actual->datos_libros.Autores << ","
+		              << actual->datos_libros.Editorial << ","
+		              << actual->datos_libros.AnoPublicacion << "," << actual->datos_libros.Estado << "," << actual->datos_libros.CantidadDisponible << endl;
+		actual = actual->siguiente;
+	}
+
+	ArchivoLibros.close();
+}
+
+int Libros::RealizarPrestamo(Socios &objSocios,string apellidoaux,string areaaux,string NombreLibroReservar,int ReservarDias,string fechadelprestamo) {   //FALTA TERMINAAAAAAR , ESTA INCOMPLETO
+
+
+
+	NodoSocios *actualSocios = objSocios.primerNodo;
+
+
+	int libroReservar = 1;
+	int bandera = 0;
+	int SocioEncontrado=0;
+
+
+
+
+	while (actualSocios != nullptr) {
+
+		if (apellidoaux == actualSocios->datos_socios.Apellido) {
+
+			SocioEncontrado=1;
+
+			NodoLibros *actual = PrimerNodo1;
+			bandera = 0;
+			//	cout << "Ingrese el Area del libro" << endl;
+			//	getline(cin, areaaux);
+
+
+
+			while (actual != nullptr) {
+
+
+				if (areaaux == actual->datos_libros.Area && NombreLibroReservar == actual->datos_libros.Nombre) {
+
+					bandera = 1;
+
+					if (actual->datos_libros.Estado == "destruido" || actual->datos_libros.CantidadDisponible == 1)
+
+					{
+						ShowMessage("El libro no se puede dar a prestamo");
+						return 0;
+
+					}
+
+
+					if (ReservarDias <= 7) {
+
+
+
+						//	cout<<"Cantidad Actual"<<actual->datos_libros.CantidadDisponible<<endl;
+						actual->datos_libros.CantidadDisponible -= libroReservar;
+
+						//	cout<<"Cantidad Restantes:"<<actual->datos_libros.CantidadDisponible<<endl;
+						fstream ArchivoPrestamo("Prestamos.csv", ios::app);
+
+						if (!ArchivoPrestamo) {
+							cout << "error al abrir el archivo prestamos";
+							return 0;
+						}
+						ArchivoPrestamo << apellidoaux << "," << areaaux << "," << NombreLibroReservar << "," << ReservarDias << "," << fechadelprestamo << endl;
+
+							ShowMessage("Se reservo correctamente");
+						ArchivoPrestamo.close();
+						GuardarListaLibrosEnCSV();
+						return 0;
+
+					} else {
+                        ShowMessage("Te has excedido del tiempo limite para prestar un libro");
+					}
+
+
+
+
+				}
+
+
+				actual = actual->siguiente;
+			}
+
+			if (bandera == 0) {
+				ShowMessage("EL AREA DEL LIBRO O EL NOMBRE LIBRO NO FUE ENCONTRADO");
+
+				return 0;
+			}
+
+
+
+
+
+
+					return 0;
+
+		}
+		actualSocios = actualSocios->siguiente;
+
+	}
+	if(SocioEncontrado==0)
+	{
+		ShowMessage("EL Apellido del socio buscado no existe");
+	}
+
+	return 0;
+}
+
+
+void Libros::modificarlibros() {
+	NodoLibros *actual = PrimerNodo1;
+
+	int idaux;
+
+	string nombremod;
+	string areamod;
+	string subareamod;
+	string autoresmod;
+	string editorialmod;
+	string anopublicacionmod;
+	string estadomod;
+
+	int opc;
+	int bandera = 0;
+
+
+	cout << "Ingrese el ID del libro que desea modificar" << endl;
+	cin >> idaux;
+	while (actual != nullptr) {
+		if (idaux == actual->datos_libros.Id) {
+			do {
+
+				cout << "Seleccione una opcion del campo a modificar" << endl;
+				//cout << "1-ID" << endl;
+				cout << "1-Nombre del Libro:" << endl;
+				cout << "2-Area" << endl;
+				cout << "3-SubArea" << endl;
+				cout << "4-Autores" << endl;
+				cout << "5-Editorial" << endl;
+				cout << "6-Ano de Publicacion" << endl;
+				cout << "7-Estado" << endl;
+				cout <<  "0- volver" << endl;
+				cin >> opc;
+				fflush(stdin);
+				switch (opc)
+
+				{
+					case 1:
+						cout << "Ingrese el nuevo nombre:" << endl;
+						getline(cin, nombremod);
+						actual->datos_libros.Nombre = nombremod;
+						cout << "Se remplazo correctamente" << endl;
+						break;
+					case 2:
+						cout << "Ingrese el nuevo Area" << endl;
+						getline(cin, areamod);
+						actual->datos_libros.Area = areamod;
+						cout << "Se remplazo correctamente" << endl;
+
+						break;
+					case 3:
+						cout << "Ingrese el nuevo SubArea" << endl;
+						getline(cin, subareamod);
+						actual->datos_libros.SubArea = subareamod;
+						cout << "Se remplazo correctamente" << endl;
+						break;
+					case 4:
+						cout << "Ingrese los nuevos Autores" << endl;
+						getline(cin, autoresmod);
+						actual->datos_libros.Autores = autoresmod;
+						cout << "Se remplazo correctamente" << endl;
+						break;
+					case 5:
+						cout << "Ingrese el nuevo editorial" << endl;
+						getline(cin, editorialmod);
+						actual->datos_libros.Editorial = editorialmod;
+						cout << "Se remplazo correctamente" << endl;
+						break;
+					case 6:
+						cout << "Ingrese el nuevo ano de publicacion" << endl;
+						getline(cin, anopublicacionmod);
+						actual->datos_libros.AnoPublicacion = anopublicacionmod;
+						cout << "Se remplazo correctamente" << endl;
+						break;
+					case 7:
+						cout << "Ingrese el nuevo estado" << endl;
+						getline(cin, estadomod);
+						actual->datos_libros.Estado = estadomod;
+						cout << "Se remplazo correctamente" << endl;
+						break;
+					case 0:
+
+						break;
+					default:
+						cout << "Opcion Incorrecta" << endl;
+
+						break;
+				}
+
+			} while (opc != 0);
+
+
+			bandera = 1;
+			GuardarListaLibrosEnCSV();
+
+		}
+
+		actual = actual->siguiente;
+
+
+
+	}
+	if (bandera == 0) {
+		cout << "EL LIBRO BUSCADO NO EXISTE" << endl;
+	}
+
+
+
+
+
+}
+
+int Libros::buscarlibro(string Areaaux , TStringGrid* grid) {
+	NodoLibros *actual = PrimerNodo1;
+
+
+	int bandera = 0;
+	int fila=1;
+	grid->RowCount = 1;
+	grid->Cells[0][0] = "ID";
+	grid->Cells[1][0] = "Nombre";
+	grid->Cells[2][0] = "Area";
+	grid->Cells[3][0] = "SubArea";
+	grid->Cells[4][0] = "Autores";
+	grid->Cells[5][0] = "Editorial";
+	grid->Cells[6][0] = "Año Publicacion";
+	grid->Cells[7][0] = "Estado";
+	grid->Cells[8][0] = "Cant.";
+	grid->Cells[9][0] = "Ubicacion";
+
+	while (actual != nullptr) {
+		if (Areaaux == actual->datos_libros.Area ) {
+			 grid->RowCount = fila + 1;
+			grid->Cells[0][fila] = IntToStr(actual->datos_libros.Id);
+			grid->Cells[1][fila] = actual->datos_libros.Nombre.c_str();
+			grid->Cells[2][fila] = actual->datos_libros.Area.c_str();
+			grid->Cells[3][fila] = actual->datos_libros.SubArea.c_str();
+			grid->Cells[4][fila] = actual->datos_libros.Autores.c_str();
+			grid->Cells[5][fila] = actual->datos_libros.Editorial.c_str();
+			grid->Cells[6][fila] = actual->datos_libros.AnoPublicacion.c_str();
+			grid->Cells[7][fila] = actual->datos_libros.Estado.c_str();
+			grid->Cells[8][fila] = IntToStr(actual->datos_libros.CantidadDisponible);
+			grid->Cells[9][fila] = actual->datos_libros.ubicacion.c_str();
+			fila++;
+			bandera = 1;
+		}
+
+		actual = actual->siguiente;
+
+	}
+	if (bandera == 0) {
+				ShowMessage("El libro Buscado no existe");
+	}
+
+
+
+
+}
+
+
+int Libros::leerarchivoprestamo()
+{
+		int contador=0;
+		string registro;
+     fstream ArchivoPrestamo("Prestamos.csv",ios::in) ;
+
+     if(!ArchivoPrestamo)
+     {
+         cout<<"Error al abrir archivo prestamos";
+         return 0;
+     }
+
+     while(getline(ArchivoPrestamo,registro) )
+     {
+     contador++;
+
+     }
+     ArchivoPrestamo.close();
+        return contador;
+
+
+
+
+}
+NodoLibros* Libros::getPrimerNodo1()
+{
+	return PrimerNodo1;
+
+}
+
+void Libros::VerPrestamos(TStringGrid* grid) {
+
+
+	fstream APrestamos("Prestamos.csv", ios::in);
+	if (!APrestamos) {
+		cout << "error al abrir el archivo ListaLibros en modo lectura";
+		return;
+	}
+
+	string registro;
+     int fila = 1;
+
+	grid->ColCount = 5;
+    grid->RowCount = 1;
+	grid->Cells[0][0] = "Apellido";
+	grid->Cells[1][0] = "Area";
+	grid->Cells[2][0] = "Nombre del Libro";
+	grid->Cells[3][0] = "Dias";
+    grid->Cells[4][0] = "Fecha del Prestamo";
+
+	while (getline(APrestamos,registro)) {
+		stringstream token(registro);
+        string campo;
+        int columna = 0;
+
+        grid->RowCount = fila + 1;
+
+		while (getline(token,campo,',')) {
+			AnsiString valor = campo.c_str();
+            grid->Cells[columna][fila] = valor;
+			columna++;
+		}
+
+        fila++;
+    }
+
+    APrestamos.close();
+}
+
+ void Libros::VaciarLista() {
+	NodoLibros* actual = primerNodo1;
+	while (actual != nullptr) {
+		NodoLibros* temp = actual;
+		actual = actual->siguiente;
+		delete temp;
+	}
+	primerNodo1 = nullptr;
+}
+
+
+
+
+
+
+
+
+

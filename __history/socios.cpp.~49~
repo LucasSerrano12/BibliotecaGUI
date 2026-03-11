@@ -1,0 +1,340 @@
+﻿#include "socios.h"
+#include <string>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <Grids.hpp>
+using namespace std;
+
+Socios::Socios() {
+
+	primerNodo = nullptr;
+}
+
+Socios::~Socios() {
+
+}
+
+void Socios::AgregarSocioALista(Estructura_Socios datos) {
+	NodoSocios* nuevoNodo = new NodoSocios;
+	nuevoNodo->datos_socios = datos;
+	nuevoNodo->siguiente = primerNodo;
+	primerNodo = nuevoNodo;
+
+}
+
+
+
+void Socios::AgregarSocioCSV(struct Estructura_Socios Datos) {
+
+
+	AgregarSocioALista(Datos);
+
+	fstream ArchivoSocios("ListaSocios.csv", ios::app);
+
+	if (!ArchivoSocios) {
+		return;
+	}
+
+	ArchivoSocios << Datos.Apellido << "," << Datos.Genero << ","
+	              << Datos.Direccion << "," << Datos.NumTelefonico << "," << Datos.Edad << "," << Datos.FechaNac << "," << Datos.CorreoElectronico << endl;
+
+	ArchivoSocios.close();
+     	
+}
+
+
+void Socios::CargarSociosDesdecsv() {
+
+	string registro;
+
+
+	Estructura_Socios datos;
+
+	fstream ArchivoSocios("ListaSocios.csv", ios::in);
+	if (!ArchivoSocios) {
+
+		return;
+	}
+
+	while (getline(ArchivoSocios, registro)) {
+		string telefonoaux, edadaux;
+
+		stringstream token(registro);
+
+		getline(token, datos.Apellido, ',');
+		getline(token, datos.Genero, ',');
+		getline(token, datos.Direccion, ',');
+		getline(token, datos.NumTelefonico, ',');
+		getline(token, edadaux, ',');
+		datos.Edad = stoi(edadaux);
+		getline(token, datos.FechaNac, ',');
+		getline(token, datos.CorreoElectronico, ',');
+
+		AgregarSocioALista(datos);
+	}
+
+	ArchivoSocios.close();
+
+
+
+}
+
+int Socios::contarSocios() {
+    int contador = 0;
+	NodoSocios* actual = primerNodo;
+	while (actual != nullptr) {
+		contador++;
+		actual = actual->siguiente;
+    }
+    return contador;
+}
+
+
+void Socios::MostrarSociosEnlistados() {
+	NodoSocios * actual = primerNodo;
+
+	while (actual != nullptr) {
+
+		actual = actual->siguiente;
+	}
+
+}
+
+void Socios::BuscarSocios(string apellido, int edad, TStringGrid* grid) {
+	NodoSocios* actualsocio = primerNodo;
+	int bandera = 0;
+
+
+	grid->RowCount = 1;
+	grid->Cells[0][0] = "Apellido";
+	grid->Cells[1][0] = "Género";
+	grid->Cells[2][0] = "Dirección";
+	grid->Cells[3][0] = "Teléfono";
+	grid->Cells[4][0] = "Edad";
+	grid->Cells[5][0] = "Nacimiento";
+	grid->Cells[6][0] = "Correo";
+
+	while (actualsocio != nullptr) {
+		if (apellido == actualsocio->datos_socios.Apellido && edad == actualsocio->datos_socios.Edad) {
+			grid->RowCount = 2; // una fila para datos
+			grid->Cells[0][1] = actualsocio->datos_socios.Apellido.c_str();
+			grid->Cells[1][1] = actualsocio->datos_socios.Genero.c_str();
+			grid->Cells[2][1] = actualsocio->datos_socios.Direccion.c_str();
+			grid->Cells[3][1] = actualsocio->datos_socios.NumTelefonico.c_str();
+			grid->Cells[4][1] = IntToStr(actualsocio->datos_socios.Edad);
+			grid->Cells[5][1] = actualsocio->datos_socios.FechaNac.c_str();
+			grid->Cells[6][1] = actualsocio->datos_socios.CorreoElectronico.c_str();
+			bandera = 1;
+			break;
+		}
+		actualsocio = actualsocio->siguiente;
+	}
+	 if (bandera == 0) {
+		ShowMessage("No se encontró ningún socio con esos datos.");
+	}
+
+}
+
+
+int Socios::DarDeBajaSocio(int edadaux, string apellidoaux, TStringGrid* grid) {
+	NodoSocios* actual = primerNodo;
+	NodoSocios* anterior = nullptr;
+
+	// Encabezado del grid
+	grid->RowCount = 1;
+	grid->Cells[0][0] = "Apellido";
+	grid->Cells[1][0] = "Género";
+	grid->Cells[2][0] = "Dirección";
+	grid->Cells[3][0] = "Teléfono";
+	grid->Cells[4][0] = "Edad";
+	grid->Cells[5][0] = "Nacimiento";
+	grid->Cells[6][0] = "Correo";
+
+	while (actual != nullptr) {
+		if (apellidoaux == actual->datos_socios.Apellido && edadaux == actual->datos_socios.Edad) {
+
+			grid->RowCount = 2; // una fila para datos
+			grid->Cells[0][1] = actual->datos_socios.Apellido.c_str();
+			grid->Cells[1][1] = actual->datos_socios.Genero.c_str();
+			grid->Cells[2][1] = actual->datos_socios.Direccion.c_str();
+			grid->Cells[3][1] = actual->datos_socios.NumTelefonico.c_str();
+			grid->Cells[4][1] = IntToStr(actual->datos_socios.Edad);
+			grid->Cells[5][1] = actual->datos_socios.FechaNac.c_str();
+			grid->Cells[6][1] = actual->datos_socios.CorreoElectronico.c_str();
+
+
+
+			if (anterior == nullptr) {
+				primerNodo = actual->siguiente;
+			} else {
+				anterior->siguiente = actual->siguiente;
+			}
+
+			delete actual;
+
+
+
+			GuardarListaEnCSV();
+			return 1;
+		}
+
+		anterior = actual;
+		actual = actual->siguiente;
+	}
+
+
+	return 0;
+}
+
+
+void Socios::GuardarListaEnCSV() {
+	ofstream ArchivoSocios("ListaSocios.csv");
+	if (!ArchivoSocios) {
+		return;
+	}
+
+	NodoSocios* actual = primerNodo;
+	while (actual != nullptr) {
+		ArchivoSocios << actual->datos_socios.Apellido << ","
+					  << actual->datos_socios.Genero << "," << actual->datos_socios.Direccion << "," << actual->datos_socios.NumTelefonico << ","
+					  << actual->datos_socios.Edad << ","
+					  << actual->datos_socios.FechaNac << ","
+		              << actual->datos_socios.CorreoElectronico << endl;
+		actual = actual->siguiente;
+	}
+
+	ArchivoSocios.close();
+}
+
+
+void Socios::modificarsocios() {
+	NodoSocios *actualsocio = primerNodo;
+	string apellidoaux;
+	int edadaux;
+
+	string apellidomod;
+	string generomod;
+	string direccionmod;
+	string telefonomod;
+	int edadmod;
+	string correoelectronicomod;
+	string fechanacmod;
+
+	int opc;
+	int bandera = 0;
+
+	cout << "Apellido del socio que desea modificar?" << endl;
+	getline(cin, apellidoaux);
+	cout << "Edad del socio?" << endl;
+	cin >> edadaux;
+	while (actualsocio != nullptr) {
+		if (apellidoaux == actualsocio->datos_socios.Apellido && edadaux == actualsocio->datos_socios.Edad) {
+			do {
+
+				cout << "Seleccione una opcion del campo a modificar" << endl;
+				cout << "1-Apellido" << endl;
+				cout << "2-Genero" << endl;
+				cout << "3-Direccion" << endl;
+				cout << "4-Numero Telefonico" << endl;
+				cout << "5-Edad" << endl;
+				cout << "6-Fecha Nacimiento." << endl;
+				cout << "7-Correo Electronico" << endl;
+				cout << "0 Salir" << endl;
+				cin >> opc;
+				fflush(stdin);
+				switch (opc)
+
+				{
+					case 1:
+						cout << "Ingrese el nuevo apellido" << endl;
+						getline(cin, apellidomod);
+						actualsocio->datos_socios.Apellido = apellidomod;
+						cout << "Se remplazo correctamente" << endl;
+						break;
+					case 2:
+						cout << "Ingrese el nuevo genero" << endl;
+						getline(cin, generomod);
+						actualsocio->datos_socios.Genero = generomod;
+						cout << "Se remplazo correctamente" << endl;
+
+						break;
+					case 3:
+						cout << "Ingrese la nueva direccion" << endl;
+						getline(cin, direccionmod);
+						actualsocio->datos_socios.Direccion = direccionmod;
+						cout << "Se remplazo correctamente" << endl;
+						break;
+					case 4:
+						cout << "Ingrese el nuevo numero telefonico" << endl;
+						getline(cin, telefonomod);
+						actualsocio->datos_socios.NumTelefonico = telefonomod;
+						cout << "Se remplazo correctamente" << endl;
+						break;
+					case 5:
+						cout << "Ingrese la nueva edad" << endl;
+						cin >> edadmod;
+						actualsocio->datos_socios.Edad = edadmod;
+						cout << "Se remplazo correctamente" << endl;
+						break;
+					case 6:
+						cout << "Ingrese la nueva fecha de nacimiento" << endl;
+						getline(cin, fechanacmod);
+						actualsocio->datos_socios.FechaNac = fechanacmod;
+						cout << "Se remplazo correctamente" << endl;
+						break;
+					case 7:
+						cout << "Ingrese el nuevo correo electronico" << endl;
+						getline(cin, correoelectronicomod);
+						actualsocio->datos_socios.CorreoElectronico = correoelectronicomod;
+						cout << "Se remplazo correctamente" << endl;
+						break;
+					case 0:
+
+						break;
+					default:
+						cout << "Opcion Incorrecta" << endl;
+
+						break;
+				}
+
+			} while (opc != 0);
+
+
+			bandera = 1;
+			GuardarListaEnCSV();
+
+		}
+
+		actualsocio = actualsocio->siguiente;
+
+
+
+	}
+	if (bandera == 0) {
+		cout << "EL SOCIO BUSCADO NO EXISTE" << endl;
+	}
+
+
+
+
+
+}
+
+
+NodoSocios* Socios::getPrimerNodo()
+{
+	return primerNodo;
+
+}
+
+
+void Socios::VaciarLista() {
+    NodoSocios* actual = primerNodo;
+    while (actual != nullptr) {
+        NodoSocios* temp = actual;
+        actual = actual->siguiente;
+        delete temp;
+    }
+    primerNodo = nullptr;
+}

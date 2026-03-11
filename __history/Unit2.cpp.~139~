@@ -1,0 +1,293 @@
+﻿//---------------------------------------------------------------------------
+
+#include <vcl.h>
+#pragma hdrstop
+#include "libros.h"
+#include "socios.h"
+#include "Unit1.h"
+#include "Unit2.h"
+#include <string>
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma resource "*.dfm"
+using namespace std;
+TForm2 *Form2;
+//---------------------------------------------------------------------------
+__fastcall TForm2::TForm2(TComponent* Owner)
+	: TForm(Owner)
+{
+listaSocios.CargarSociosDesdecsv();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm2::BotonRegistrarAgregarSocioClick(TObject *Sender)
+{
+		  struct Estructura_Socios Datos;
+// Obtener datos desde la interfaz
+	AnsiString apellido = CasillaApellido->Text;
+	AnsiString genero = GeneroM->Checked ? "Masculino" : (GeneroF->Checked ? "Femenino" : "");
+	AnsiString direccion = CasillaDireccion->Text;
+	AnsiString telefono = CasillaTelefono->Text;
+	AnsiString edad = CasillaEdad->Text;
+	AnsiString nacimiento = DateToStr(CasillaFechaNac->Date);
+	AnsiString correo = CasillaCorreo->Text;
+
+	// Validación básica
+	if (apellido.IsEmpty() || genero.IsEmpty() || direccion.IsEmpty() || telefono.IsEmpty()
+		|| edad.IsEmpty() || nacimiento.IsEmpty() || correo.IsEmpty()) {
+		ShowMessage("Por favor, complete todos los campos.");
+		return;
+	}
+
+	// Convertir a string estándar
+	Datos.Apellido = apellido.c_str();
+	Datos.Genero = genero.c_str();
+	Datos.Direccion = direccion.c_str();
+	Datos.NumTelefonico = telefono.c_str();
+	Datos.Edad = stoi(edad.c_str());
+	Datos.FechaNac = nacimiento.c_str();
+	Datos.CorreoElectronico = correo.c_str();
+
+	listaSocios.AgregarSocioCSV(Datos);
+
+
+
+	ShowMessage("Socio Registrado Exitosamente");
+
+
+
+	CasillaApellido->Text="";
+	CasillaDireccion->Text="";
+	CasillaTelefono->Text="";
+	CasillaEdad->Text="";
+    CasillaCorreo->Text="";
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm2::MostrarSocios() {
+	NodoSocios* actual = listaSocios.primerNodo;
+
+	int cantidad = 0;
+	NodoSocios* temp = actual;
+	while (temp != nullptr) {
+		cantidad++;
+		temp = temp->siguiente;
+	}
+
+	PlanillaMostrarSocio->RowCount = cantidad + 1;
+
+	// Opcional: agregar encabezados si es la primera vez
+	PlanillaMostrarSocio->Cells[0][0] = "Apellido";
+	PlanillaMostrarSocio->Cells[1][0] = "Género";
+	PlanillaMostrarSocio->Cells[2][0] = "Dirección";
+	PlanillaMostrarSocio->Cells[3][0] = "Teléfono";
+	PlanillaMostrarSocio->Cells[4][0] = "Edad";
+	PlanillaMostrarSocio->Cells[5][0] = "Nacimiento";
+	PlanillaMostrarSocio->Cells[6][0] = "Correo";
+
+	int fila = 1;
+	while (actual != nullptr) {
+		PlanillaMostrarSocio->Cells[0][fila] = actual->datos_socios.Apellido.c_str();
+		PlanillaMostrarSocio->Cells[1][fila] = actual->datos_socios.Genero.c_str();
+		PlanillaMostrarSocio->Cells[2][fila] = actual->datos_socios.Direccion.c_str();
+		PlanillaMostrarSocio->Cells[3][fila] = actual->datos_socios.NumTelefonico.c_str();
+		PlanillaMostrarSocio->Cells[4][fila] = IntToStr(actual->datos_socios.Edad);
+		PlanillaMostrarSocio->Cells[5][fila] = actual->datos_socios.FechaNac.c_str();
+		PlanillaMostrarSocio->Cells[6][fila] = actual->datos_socios.CorreoElectronico.c_str();
+
+		actual = actual->siguiente;
+		fila++;
+	}
+}
+
+//---------------------------------------------------------------------------
+void __fastcall TForm2::BotonVerMostrarSociosClick(TObject *Sender){
+MostrarSocios();
+}
+
+void __fastcall TForm2::BotonVolverAgregarSocioClick(TObject *Sender){
+
+Close();
+
+}
+
+
+void __fastcall TForm2::BotonEliminarSocioClick(TObject *Sender)
+{
+
+	 AnsiString edad2 = TeditEdadBuscarEliminar->Text;
+	 AnsiString apellido2 =  TeditApellidoBuscarEliminar->Text
+if (idaux2.IsEmpty()) {
+	ShowMessage("Por favor, complete todos los campos.");
+	return;
+}
+int idaux = stoi(AnsiString(CasillaTextoIDLibro->Text).c_str());
+
+string apellido = AnsiString (TeditApellidoBuscarEliminar->Text).c_str();
+int edad = stoi(AnsiString(TeditEdadBuscarEliminar->Text).c_str());
+
+int socioEncontrado=(listaSocios.DarDeBajaSocio(edad,apellido,StringGrid1));
+
+if(socioEncontrado == 1){
+ShowMessage("Se ha dado de baja al Socio correctamente");
+
+}else
+{
+	  ShowMessage("la edad o apellido buscado no se encontro");
+}
+		TeditApellidoBuscarEliminar->Text="";
+        TeditEdadBuscarEliminar->Text="";
+
+}
+
+
+
+void __fastcall TForm2::Button2Click(TObject *Sender)
+{
+	AnsiString Apellido = CasillaApellidoBuscar->Text;
+	AnsiString Edad = CasillaEdadBuscar->Text;
+
+    if (Apellido.IsEmpty() || Edad.IsEmpty()) {
+        ShowMessage("Por favor, complete todos los campos.");
+        return;
+    }
+
+	string apellido = Apellido.c_str();
+	int edad = stoi(Edad.c_str());
+
+	listaSocios.BuscarSocios(apellido, edad, StringGrid1);
+
+			 CasillaApellidoBuscar->Text  ="";
+			 CasillaEdadBuscar->Text="";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+void __fastcall TForm2::ButtonBuscarSociosClick(TObject *Sender)
+{
+	PlanillaBuscarSociosModificar->ColCount = 2; // resetear
+	PlanillaBuscarSociosModificar->RowCount = 7;
+    PlanillaBuscarSociosModificar->Cells[0][0] = "Apellido";
+	PlanillaBuscarSociosModificar->Cells[0][1] = "Género";
+	PlanillaBuscarSociosModificar->Cells[0][2] = "Dirección";
+	PlanillaBuscarSociosModificar->Cells[0][3] = "Teléfono";
+	PlanillaBuscarSociosModificar->Cells[0][4] = "Edad";
+	PlanillaBuscarSociosModificar->Cells[0][5] = "Nacimiento";
+	PlanillaBuscarSociosModificar->Cells[0][6] = "Correo";
+
+
+     NodoSocios* actual = listaSocios.getPrimerNodo();
+	string apellido = AnsiString(CasillaApellidoModificarSocio->Text).c_str();
+	int edadmod = stoi(AnsiString(CasillaEdadModificarSocio->Text).c_str());
+
+
+
+
+	while (actual != nullptr)
+    {
+		if (apellido==actual->datos_socios.Apellido &&  edadmod==actual->datos_socios.Edad)
+		{
+
+			apellidoOriginal = apellido;
+			edadOriginal = edadmod;
+			PlanillaBuscarSociosModificar->Cells[1][0] = actual->datos_socios.Apellido.c_str();
+			PlanillaBuscarSociosModificar->Cells[1][1] = actual->datos_socios.Genero.c_str();
+			PlanillaBuscarSociosModificar->Cells[1][2] = actual->datos_socios.Direccion.c_str();
+			PlanillaBuscarSociosModificar->Cells[1][3] = actual->datos_socios.NumTelefonico.c_str();
+			PlanillaBuscarSociosModificar->Cells[1][4] = IntToStr(actual->datos_socios.Edad);
+			PlanillaBuscarSociosModificar->Cells[1][5] = actual->datos_socios.FechaNac.c_str();
+			PlanillaBuscarSociosModificar->Cells[1][6] = actual->datos_socios.CorreoElectronico.c_str();
+
+			return;
+        }
+        actual = actual->siguiente;
+	}
+
+
+		ShowMessage("El apellido o la edad no existe.");
+}
+
+
+
+void __fastcall TForm2::PlanillaBuscarSociosModificarClick(TObject *Sender)
+{
+	  int columna1 = PlanillaBuscarSociosModificar->Col;
+ if (columna1 == 0)
+ {
+ return;
+ }
+
+	CasillaApellidoModSocios->Text = PlanillaBuscarSociosModificar->Cells[1][0];
+	CasillaGeneroModSocios->Text = PlanillaBuscarSociosModificar->Cells[1][1];
+	CasillaDireccionModSocios->Text = PlanillaBuscarSociosModificar->Cells[1][2];
+	CasillaTelefonoModSocios->Text = PlanillaBuscarSociosModificar->Cells[1][3];
+	CasillaEdadModSocios->Text = PlanillaBuscarSociosModificar->Cells[1][4];
+	CasillaNacimientoModSocios->Text = PlanillaBuscarSociosModificar->Cells[1][5];
+	CasillaCorreoModSocios->Text = PlanillaBuscarSociosModificar->Cells[1][6];
+}
+
+//---------------------------------------------------------------------------
+
+void __fastcall TForm2::BotonModificarSocioClick(TObject *Sender)
+{
+
+   //	string apellido = AnsiString(CasillaApellidoModificarSocio->Text).c_str();
+   //	int edad = stoi(AnsiString(CasillaEdadModificarSocio->Text).c_str());
+
+	NodoSocios* actual = listaSocios.getPrimerNodo(); // obtener cabeza desde metodo en cpp
+	while (actual != nullptr)
+	{
+		if (actual->datos_socios.Apellido == apellidoOriginal && actual->datos_socios.Edad == edadOriginal)
+		{
+
+
+			// Modificar campos
+			actual->datos_socios.Apellido = AnsiString(CasillaApellidoModSocios->Text).c_str();
+			actual->datos_socios.Genero = AnsiString(CasillaGeneroModSocios->Text).c_str();
+			actual->datos_socios.Direccion = AnsiString(CasillaDireccionModSocios->Text).c_str();
+			actual->datos_socios.NumTelefonico = AnsiString(CasillaTelefonoModSocios->Text).c_str();
+			actual->datos_socios.Edad = stoi(AnsiString(CasillaEdadModSocios->Text).c_str());
+			actual->datos_socios.FechaNac = AnsiString(CasillaNacimientoModSocios->Text).c_str();
+			actual->datos_socios.CorreoElectronico = AnsiString(CasillaCorreoModSocios->Text).c_str();
+
+
+            apellidoOriginal = actual->datos_socios.Apellido;
+			edadOriginal = actual->datos_socios.Edad;
+
+			break;
+		}
+		actual = actual->siguiente;
+	}
+
+
+	listaSocios.GuardarListaEnCSV();
+
+
+	// Mostrar en el segundo StringGrid
+	PlanillaSocioModificado->ColCount = 2;
+	PlanillaSocioModificado->RowCount = 7;
+	PlanillaSocioModificado->Cells[0][0] = CasillaApellidoModSocios->Text;
+	PlanillaSocioModificado->Cells[0][1] = CasillaGeneroModSocios->Text;
+	PlanillaSocioModificado->Cells[0][2] = CasillaDireccionModSocios->Text;
+	PlanillaSocioModificado->Cells[0][3] = CasillaTelefonoModSocios->Text;
+	PlanillaSocioModificado->Cells[0][4] = CasillaEdadModSocios->Text;
+	PlanillaSocioModificado->Cells[0][5] = CasillaNacimientoModSocios->Text;
+	PlanillaSocioModificado->Cells[0][6] = CasillaCorreoModSocios->Text;
+
+	ShowMessage("Modificación realizada.");
+
+}
+//---------------------------------------------------------------------------
+
+
+//---------------------------------------------------------------------------
+

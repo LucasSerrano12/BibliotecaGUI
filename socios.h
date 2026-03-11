@@ -1,0 +1,57 @@
+#ifndef SOCIOS_H
+#define SOCIOS_H
+
+#include<stdio.h>
+#include<string>
+#include <iostream>
+#include<fstream>
+#include<sstream>
+#include <Grids.hpp>
+
+using namespace std;
+
+struct Estructura_Socios{
+	
+	string 	Apellido;
+	string	Genero;
+	string 	Direccion;
+	string	NumTelefonico;
+	int 	Edad;
+	string	FechaNac;
+	string	CorreoElectronico;
+};
+
+struct NodoSocios
+{
+Estructura_Socios datos_socios;
+NodoSocios* siguiente;
+};
+
+class Socios {
+	
+public:
+	
+	Socios();
+	virtual ~Socios();
+
+    int contarSocios();
+	NodoSocios* primerNodo;
+	void AgregarSocioALista(Estructura_Socios datos);
+	void AgregarSocioCSV(struct Estructura_Socios datos);
+	void CargarSociosDesdecsv();
+	void MostrarSociosEnlistados();
+	void BuscarSocios(string apellido, int edad,TStringGrid* grid);
+	NodoSocios* getPrimerNodo();
+	int DarDeBajaSocio(int edadaux, string apellidoaux,TStringGrid* grid);
+    void GuardarListaEnCSV();
+	void modificarsocios();
+    void VaciarLista();
+
+
+
+private:
+	
+};
+
+#endif
+
