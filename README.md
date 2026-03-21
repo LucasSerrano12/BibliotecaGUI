@@ -1,30 +1,38 @@
-# Sistema de Gestión de Biblioteca (C++ Builder)
+
+# 📚 Sistema de Gestión de Biblioteca
 
 Aplicación de escritorio desarrollada en C++ para administrar una biblioteca mediante una interfaz gráfica.
 
-## Funcionalidades
+---
 
-### Gestión de usuarios
-- Registrar usuarios
-- Modificar datos de usuarios
-- Dar de baja usuarios
+## 📋 Descripción
+
+Este proyecto fue desarrollado como práctica para aplicar conceptos de programación orientada a objetos en C++, utilizando C++ Builder para construir una interfaz gráfica de gestión de usuarios, libros y préstamos.
+
+---
+
+## 🛠️ Tecnologías utilizadas
+
+- **C++** — Lógica principal del sistema
+- **C++ Builder** — Entorno de desarrollo con interfaz gráfica (formularios)
+
+---
+
+## ⚙️ Funcionalidades
+
+### 👤 Gestión de usuarios
+- Registrar, modificar y dar de baja usuarios
 - Visualizar usuarios registrados
 
-### Gestión de libros
-- Registrar libros
-- Modificar información de libros
-- Dar de baja libros
+### 📖 Gestión de libros
+- Registrar, modificar y dar de baja libros
 - Visualizar libros disponibles
 
-### Gestión de préstamos
+### 🔄 Gestión de préstamos
 - Registrar préstamos de libros
 
-## Tecnologías utilizadas
+---
 
-- C++
-- C++ Builder
-- Interfaz gráfica (formularios)
+## 👤 Autor
 
-## Descripción
-
-Este proyecto fue desarrollado como práctica para aplicar conceptos de programación en C++ utilizando C++ Builder, implementando una interfaz gráfica para la gestión de usuarios, libros y préstamos en una biblioteca.
+Lucas Serrano
