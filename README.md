@@ -31,8 +31,3 @@ Este proyecto fue desarrollado como práctica para aplicar conceptos de programa
 ### 🔄 Gestión de préstamos
 - Registrar préstamos de libros
 
----
-
-## 👤 Autor
-
-Lucas Serrano
